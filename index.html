@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css/main.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Crud Example</h1>
+        <h2>All users</h2>
+
+        <table id="user_list">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Avatar</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+
+            <tbody id="tbody">
+            </tbody>
+
+        </table>
+        <h2>Add users</h2>
+
+        <form id="add-user-form" action="#">
+          <input type="hidden" name="id" id="update-id"/>
+          <label for="name">First Name:</label>
+          <input type="text" name="name" id="names"/>
+          <br>
+          <label for="lName">Last Name:</label>
+          <input type="text" name="lName" id="lName"/>
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email"/>
+          <label for="avatar">Avatar:</label>
+          <input type="file" name="avatar" id="avatar">
+          <br />
+          <button id="save-user_button" type="submit">Save</button>
+        </form>
+    </div>
+
+
+    
+    <script src="./main.js/main.js"></script>
+</body>
+</html>
