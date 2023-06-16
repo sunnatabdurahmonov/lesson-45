@@ -9,9 +9,24 @@
 </head>
 <body>
 
+
     <div class="container">
+
+
+
         <h1>Crud Example</h1>
         <h2>All users</h2>
+
+        <form class="add-user-form" action="#">
+            <input type="hidden" name="id" id="update-id"/>
+            <input type="text" name="name" id="names" placeholder="Firs Name">
+            <input type="text" name="lName" id="lName" placeholder="Last Name"/>
+            <input type="email" name="email" id="email" placeholder="Email"/>
+            <input type="file" name="avatar" id="avatar" placeholder="Avatar">
+            <button id="save-user_button" type="submit">Save</button>
+          </form>
+
+        <button class="add">Add</button>
 
         <table id="user_list">
             <thead>
@@ -32,20 +47,6 @@
         </table>
         <h2>Add users</h2>
 
-        <form id="add-user-form" action="#">
-          <input type="hidden" name="id" id="update-id"/>
-          <label for="name">First Name:</label>
-          <input type="text" name="name" id="names"/>
-          <br>
-          <label for="lName">Last Name:</label>
-          <input type="text" name="lName" id="lName"/>
-          <label for="email">Email:</label>
-          <input type="email" name="email" id="email"/>
-          <label for="avatar">Avatar:</label>
-          <input type="file" name="avatar" id="avatar">
-          <br />
-          <button id="save-user_button" type="submit">Save</button>
-        </form>
     </div>
 
 

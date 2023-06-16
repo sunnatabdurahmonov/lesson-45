@@ -1,10 +1,9 @@
 const url = 'https://reqres.in/api/users ';
-const form = document.querySelector('#add-user-form')
+const form = document.querySelector('.add-user-form')
 
 const tbody = document.querySelector('#tbody')
 
 fetch(url).then((response) => response.json()).then(data => {
-    console.log();
     data.data.map((user) => {
         const {id,first_name ,last_name,email,avatar} = user
 
@@ -85,6 +84,8 @@ else{
 
             }
             tbody.appendChild(row)
+
+            form.reset()
     
         }).catch(err => console.error(err))
 }
@@ -107,6 +108,8 @@ tbody.addEventListener('click', (e) => {
 
 
           const save =  document.querySelector('#save-user_button').textContent = 'Update User'
+          form.classList.add('form')
+          add.remove()
 
     }
     else if(e.target.classList.contains('delete-button')){
@@ -162,3 +165,12 @@ async function editUser(id,name,lName,email){
          
     }).catch(err => console.error(err))
 }
+
+const add = document.querySelector('.add')
+add.addEventListener('click',() =>  {
+
+    form.classList.add('form')
+    add.classList.add('add2')
+    add.remove()
+
+})
