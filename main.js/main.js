@@ -86,8 +86,12 @@ else{
             tbody.appendChild(row)
 
             form.reset()
+
     
         }).catch(err => console.error(err))
+
+        form.classList.add('form')
+        form.remove()
 }
 })
 
