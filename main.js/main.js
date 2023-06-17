@@ -28,6 +28,14 @@ fetch(url).then((response) => response.json()).then(data => {
         tbody.appendChild(row)
     })
 })
+
+
+const add = document.querySelector('.add')
+add.addEventListener('click',() =>  {
+
+    form.classList.add('form')
+
+})
 form.addEventListener('submit', (e) => {
     e.preventDefault()
 
@@ -40,6 +48,8 @@ console.log(avatar);
 
 
 const save =  document.querySelector('#save-user_button').textContent = 'Save'
+form.classList.add('form')
+form.remove()
 
 if(id){
     editUser(id,name, lName, email)
@@ -85,13 +95,16 @@ else{
             }
             tbody.appendChild(row)
 
-            form.reset()
+            // form.reset()
+            form.classList.add('form')
+            form.remove()
 
     
         }).catch(err => console.error(err))
 
         form.classList.add('form')
         form.remove()
+
 }
 })
 
@@ -113,7 +126,6 @@ tbody.addEventListener('click', (e) => {
 
           const save =  document.querySelector('#save-user_button').textContent = 'Update User'
           form.classList.add('form')
-          add.remove()
 
     }
     else if(e.target.classList.contains('delete-button')){
@@ -169,12 +181,3 @@ async function editUser(id,name,lName,email){
          
     }).catch(err => console.error(err))
 }
-
-const add = document.querySelector('.add')
-add.addEventListener('click',() =>  {
-
-    form.classList.add('form')
-    add.classList.add('add2')
-    add.remove()
-
-})
