@@ -36,8 +36,43 @@ add.addEventListener('click',() =>  {
     form.classList.add('form')
 
 })
+
+
+
+tbody.addEventListener('click', (e) => {
+
+    if(e.target.classList.contains('edit-button')){
+
+        const id = e.target.dataset.id
+        const name = e.target.dataset.name
+        const lname = e.target.dataset.lname
+        const email = e.target.dataset.email
+
+
+          document.querySelector('#update-id').value = id
+          document.getElementById('names').value = name
+          document.getElementById('lName').value = lname
+          document.getElementById('email').value = email
+
+
+          const save =  document.querySelector('#save-user_button').textContent = 'Update User'
+          form.classList.add('form')
+        form.remove()
+
+    }
+    else if(e.target.classList.contains('delete-button')){
+        alert("Rostan ham o'chirmoqchimisiz ")
+        const id = e.target.dataset.id;
+        deleteUser(id).then(()=> {
+            const tableRow = e.target.closest('tr')
+            tableRow.remove()
+        }).catch(error => console.error(error))
+
+
+    }
+})
 form.addEventListener('submit', (e) => {
-    e.preventDefault()
+     e.preventDefault()
 
 const id = document.querySelector('#update-id').value
 const name = document.getElementById('names').value
@@ -48,8 +83,7 @@ console.log(avatar);
 
 
 const save =  document.querySelector('#save-user_button').textContent = 'Save'
-form.classList.add('form')
-form.remove()
+form.classList.remove('form')
 
 if(id){
     editUser(id,name, lName, email)
@@ -95,49 +129,17 @@ else{
             }
             tbody.appendChild(row)
 
-            // form.reset()
-            form.classList.add('form')
-            form.remove()
+            // // form.reset()
+            // form.classList.add('form')
+            // // form.remove()
 
     
         }).catch(err => console.error(err))
 
-        form.classList.add('form')
-        form.remove()
+        // form.classList.add('form')
+        // form.remove()
 
 }
-})
-
-tbody.addEventListener('click', (e) => {
-
-    if(e.target.classList.contains('edit-button')){
-
-        const id = e.target.dataset.id
-        const name = e.target.dataset.name
-        const lname = e.target.dataset.lname
-        const email = e.target.dataset.email
-
-
-          document.querySelector('#update-id').value = id
-          document.getElementById('names').value = name
-          document.getElementById('lName').value = lname
-          document.getElementById('email').value = email
-
-
-          const save =  document.querySelector('#save-user_button').textContent = 'Update User'
-          form.classList.add('form')
-
-    }
-    else if(e.target.classList.contains('delete-button')){
-        alert("Rostan ham o'chirmoqchimisiz ")
-        const id = e.target.dataset.id;
-        deleteUser(id).then(()=> {
-            const tableRow = e.target.closest('tr')
-            tableRow.remove()
-        }).catch(error => console.error(error))
-
-
-    }
 })
 
 async function deleteUser(id){
