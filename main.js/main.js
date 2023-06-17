@@ -86,14 +86,15 @@ const save =  document.querySelector('#save-user_button').textContent = 'Save'
 form.classList.remove('form')
 
 if(id){
-    editUser(id,name, lName, email)
+    editUser(id,name, lName, email,avatar)
     form.reset()
 }
 else{
     const person = {
         name: name,
         lName: lName,
-        email: email
+        email: email,
+        avatar:avatar
     }
     
         fetch(url, {
@@ -117,7 +118,7 @@ else{
                 </td>
         
                 <td> 
-                      <button class = 'edit-button' data-id=${data.id} data-name=${name} data-lName=${lName} data-email=${email}>Edit</button>
+                      <button class = 'edit-button' data-id=${data.id} data-name=${name} data-lName=${lName} data-email=${email} data-avatar=${avatarUrl}>Edit</button>
                 </td>
         
                 <td> 
@@ -129,15 +130,10 @@ else{
             }
             tbody.appendChild(row)
 
-            // // form.reset()
-            // form.classList.add('form')
-            // // form.remove()
+
 
     
         }).catch(err => console.error(err))
-
-        // form.classList.add('form')
-        // form.remove()
 
 }
 })
@@ -157,12 +153,13 @@ async function deleteUser(id){
    }
 }
 
-async function editUser(id,name,lName,email){
+async function editUser(id,name,lName,email,avatarUrl){
 
     const formData ={
         name:name,
         lName:lName,
-        email:email
+        email:email,
+        avatar:avatarUrl
     }
     return await fetch(`${url}/${id}`,{
         method: 'PUT',
@@ -175,6 +172,17 @@ async function editUser(id,name,lName,email){
                 row.cells[1].textContent = name
                 row.cells[2].textContent = lName
                 row.cells[3].textContent = email
+                // row.cells[4].innerHTML = avatar
+                // console.log(avatar);
+
+                const reader = new FileReader()
+                reader.readAsDataURL(avatarUrl)
+                reader.onload = () => {
+                    const avatar2 = reader.result
+                    row.cells[4].innerHTML = `<td> <img src= '${avatar2}' alt = '${name}'></img></td>`
+                    console.log(avatar2);
+
+                }
 
             }
             
