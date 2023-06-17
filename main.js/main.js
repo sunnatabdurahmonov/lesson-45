@@ -57,7 +57,7 @@ tbody.addEventListener('click', (e) => {
 
           const save =  document.querySelector('#save-user_button').textContent = 'Update User'
           form.classList.add('form')
-        form.remove()
+     
 
     }
     else if(e.target.classList.contains('delete-button')){
