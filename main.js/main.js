@@ -89,6 +89,9 @@ if(id){
     editUser(id,name, lName, email,avatar)
     form.reset()
 }
+else if(name === ''){
+    alert('Malumot kiriting')
+}
 else{
     const person = {
         name: name,
