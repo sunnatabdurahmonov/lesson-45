@@ -1,9 +1,15 @@
+'use strict'
+
 const url = 'https://reqres.in/api/users ';
 const form = document.querySelector('.add-user-form')
 
 const tbody = document.querySelector('#tbody')
+let number;
 
 fetch(url).then((response) => response.json()).then(data => {
+    
+  number = data.data.length;
+
     data.data.map((user) => {
         const {id,first_name ,last_name,email,avatar} = user
 
@@ -37,40 +43,6 @@ add.addEventListener('click',() =>  {
 
 })
 
-
-
-tbody.addEventListener('click', (e) => {
-
-    if(e.target.classList.contains('edit-button')){
-
-        const id = e.target.dataset.id
-        const name = e.target.dataset.name
-        const lname = e.target.dataset.lname
-        const email = e.target.dataset.email
-
-
-          document.querySelector('#update-id').value = id
-          document.getElementById('names').value = name
-          document.getElementById('lName').value = lname
-          document.getElementById('email').value = email
-
-
-          const save =  document.querySelector('#save-user_button').textContent = 'Update User'
-          form.classList.add('form')
-     
-
-    }
-    else if(e.target.classList.contains('delete-button')){
-        alert("Rostan ham o'chirmoqchimisiz ")
-        const id = e.target.dataset.id;
-        deleteUser(id).then(()=> {
-            const tableRow = e.target.closest('tr')
-            tableRow.remove()
-        }).catch(error => console.error(error))
-
-
-    }
-})
 form.addEventListener('submit', (e) => {
      e.preventDefault()
 
@@ -109,10 +81,10 @@ else{
 
             const reader = new FileReader()
             reader.readAsDataURL(avatar)
-            reader.onload = () =>{
+            reader.onload = () => {
                 const avatarUrl = reader.result
                 row.innerHTML = `
-                <td>${data.id}</td>
+                <td>${number}</td>
                 <td>${name}</td>
                 <td>${lName}</td>
                 <td>${email}</td>
@@ -132,13 +104,47 @@ else{
 
             }
             tbody.appendChild(row)
-
-
-
+number++
+            form.reset()
     
         }).catch(err => console.error(err))
 
 }
+})
+
+
+
+tbody.addEventListener('click', (e) => {
+
+    if(e.target.classList.contains('edit-button')){
+
+        const id = e.target.dataset.id
+        const name = e.target.dataset.name
+        const lname = e.target.dataset.lname
+        const email = e.target.dataset.email
+
+
+          document.querySelector('#update-id').value = id
+          document.getElementById('names').value = name
+          document.getElementById('lName').value = lname
+          document.getElementById('email').value = email
+
+
+          const save =  document.querySelector('#save-user_button').textContent = 'Update User'
+          form.classList.add('form')
+     
+
+    }
+    else if(e.target.classList.contains('delete-button')){
+        alert("Rostan ham o'chirmoqchimisiz ")
+        const id = e.target.dataset.id;
+        deleteUser(id).then(() => {
+            const tableRow = e.target.closest('tr')
+            tableRow.remove()
+        }).catch(error => console.error(error))
+
+
+    }
 })
 
 async function deleteUser(id){
@@ -194,3 +200,5 @@ async function editUser(id,name,lName,email,avatarUrl){
          
     }).catch(err => console.error(err))
 }
+
+
